@@ -1,0 +1,14 @@
+***********************************************
+
+El objetivo de este script es ordenar archivos
+        en el directorio de ejecución.
+
+***********************************************
+
+fue probado en debian 10 buster 
+usa python en su version 3.6 + o superior 
+
+el script ordena los archivos basados en su ext
+y crea distintas carpetas para agruparlos 
+
+saludos ! att : Julian zapata rugeles
