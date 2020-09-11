@@ -7,6 +7,9 @@ https://www.gnu.org/licenses/gpl-3.0.html GPL3
 colaboremos con el movimiento de software libre para un mundo mejor.
 
 El objetivo de este script es organizar el directorio.
+
+
+11 septiembre 2020 : cambio ---> añadido reconocimiento de plataforma.
 """
 
 menu="""                             _              _
@@ -16,13 +19,16 @@ menu="""                             _              _
  \___/|_|  \__, |\__,_|_| |_|_/___\__,_|\__,_|\___/|_|
            |___/
 
-                 Bievenido Nuevamente
+                 Bienvenido Nuevamente
 
 """
 import os
 import os.path
 import sys
+import platform
 
+MOVER="mv" # comando linux , se cambiará a move si se detecta la plataforma windows
+PLATAFORMA=platform.system() # retorna la plataforma
 NOMBRE_ARCHIVO=sys.argv[0] # determina el nombre del archivo python en ejecución para evitar su movimiento
 EXEPCIONES=[] #añada aquí archivos que no se moveran. ejemplo : EXEPCIONES=["mi_archivo.txt","mi_archivo2.mp3" etc ... ]
 
@@ -70,8 +76,8 @@ class Organizador(object):
         for elementosAmover in self.archivosEnDirectorio:
             try:
                 file=elementosAmover.split(".")
-                os.system("mv {} {}/".format(elementosAmover,file[1]))
-                print("se movió  {}  -->  {}/".format(elementosAmover,file[1]))
+                os.system("{} {} {}/".format(MOVER,elementosAmover,file[1]))
+                print("se movió  {}  print(PLATAFORMA)-->  {}/".format(elementosAmover,file[1]))
             except Exception as e:
                 pass # omitidos
 
@@ -103,6 +109,8 @@ class Organizador(object):
 
 if __name__ == '__main__':
     #os.system("clear") # refrescar la pantalla de terminal
+    if PLATAFORMA=="Windows":
+        MOVER="move"
     session=Organizador()
     validacionContinuar=session.ordenar() # retorna True Explicitamente. Enter representa cadena vacía-
     if validacionContinuar:
